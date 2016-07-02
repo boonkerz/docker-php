@@ -12,7 +12,6 @@ class ExecStartConfig
      * @var bool
      */
     protected $tty;
-
     /**
      * @return bool
      */
@@ -20,7 +19,6 @@ class ExecStartConfig
     {
         return $this->detach;
     }
-
     /**
      * @param bool $detach
      *
@@ -29,10 +27,8 @@ class ExecStartConfig
     public function setDetach($detach = null)
     {
         $this->detach = $detach;
-
         return $this;
     }
-
     /**
      * @return bool
      */
@@ -40,7 +36,6 @@ class ExecStartConfig
     {
         return $this->tty;
     }
-
     /**
      * @param bool $tty
      *
@@ -49,7 +44,6 @@ class ExecStartConfig
     public function setTty($tty = null)
     {
         $this->tty = $tty;
-
         return $this;
     }
 }

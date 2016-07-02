@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class UlimitNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class UlimitNormalizer extends SerializerAwareNormalizer implements Denormalizer
         if ($type !== 'Docker\\API\\Model\\Ulimit') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\Ulimit) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -48,11 +43,9 @@ class UlimitNormalizer extends SerializerAwareNormalizer implements Denormalizer
         if (property_exists($data, 'Hard')) {
             $object->setHard($data->{'Hard'});
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getName()) {
@@ -64,7 +57,6 @@ class UlimitNormalizer extends SerializerAwareNormalizer implements Denormalizer
         if (null !== $object->getHard()) {
             $data->{'Hard'} = $object->getHard();
         }
-
         return $data;
     }
 }

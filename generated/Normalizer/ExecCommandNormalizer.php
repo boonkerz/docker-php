@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class ExecCommandNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class ExecCommandNormalizer extends SerializerAwareNormalizer implements Denorma
         if ($type !== 'Docker\\API\\Model\\ExecCommand') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\ExecCommand) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -63,11 +58,9 @@ class ExecCommandNormalizer extends SerializerAwareNormalizer implements Denorma
         if (property_exists($data, 'Container')) {
             $object->setContainer($this->serializer->deserialize($data->{'Container'}, 'Docker\\API\\Model\\Container', 'raw', $context));
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getID()) {
@@ -94,7 +87,6 @@ class ExecCommandNormalizer extends SerializerAwareNormalizer implements Denorma
         if (null !== $object->getContainer()) {
             $data->{'Container'} = $this->serializer->serialize($object->getContainer(), 'raw', $context);
         }
-
         return $data;
     }
 }

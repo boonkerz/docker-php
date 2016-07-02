@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class ContainerStateNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class ContainerStateNormalizer extends SerializerAwareNormalizer implements Deno
         if ($type !== 'Docker\\API\\Model\\ContainerState') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\ContainerState) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -66,11 +61,9 @@ class ContainerStateNormalizer extends SerializerAwareNormalizer implements Deno
         if (property_exists($data, 'StartedAt')) {
             $object->setStartedAt($data->{'StartedAt'});
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getError()) {
@@ -100,7 +93,6 @@ class ContainerStateNormalizer extends SerializerAwareNormalizer implements Deno
         if (null !== $object->getStartedAt()) {
             $data->{'StartedAt'} = $object->getStartedAt();
         }
-
         return $data;
     }
 }

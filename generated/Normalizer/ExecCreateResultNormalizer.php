@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements De
         if ($type !== 'Docker\\API\\Model\\ExecCreateResult') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\ExecCreateResult) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -45,7 +40,7 @@ class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements De
         if (property_exists($data, 'Warnings')) {
             $value = $data->{'Warnings'};
             if (is_array($data->{'Warnings'})) {
-                $values = [];
+                $values = array();
                 foreach ($data->{'Warnings'} as $value_1) {
                     $values[] = $value_1;
                 }
@@ -56,11 +51,9 @@ class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements De
             }
             $object->setWarnings($value);
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getId()) {
@@ -68,7 +61,7 @@ class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements De
         }
         $value = $object->getWarnings();
         if (is_array($object->getWarnings())) {
-            $values = [];
+            $values = array();
             foreach ($object->getWarnings() as $value_1) {
                 $values[] = $value_1;
             }
@@ -78,7 +71,6 @@ class ExecCreateResultNormalizer extends SerializerAwareNormalizer implements De
             $value = $object->getWarnings();
         }
         $data->{'Warnings'} = $value;
-
         return $data;
     }
 }

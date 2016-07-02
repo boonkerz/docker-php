@@ -2,14 +2,13 @@
 
 namespace Docker\API\Normalizer;
 
-use Joli\Jane\Normalizer\NormalizerArray;
 use Joli\Jane\Normalizer\ReferenceNormalizer;
-
+use Joli\Jane\Normalizer\NormalizerArray;
 class NormalizerFactory
 {
     public static function create()
     {
-        $normalizers   = [];
+        $normalizers = array();
         $normalizers[] = new ReferenceNormalizer();
         $normalizers[] = new NormalizerArray();
         $normalizers[] = new VersionNormalizer();
@@ -24,6 +23,7 @@ class NormalizerFactory
         $normalizers[] = new DeviceWeightNormalizer();
         $normalizers[] = new DeviceRateNormalizer();
         $normalizers[] = new ContainerConfigNormalizer();
+        $normalizers[] = new NetworkingSettingsNormalizer();
         $normalizers[] = new NetworkConfigNormalizer();
         $normalizers[] = new ContainerNetworkNormalizer();
         $normalizers[] = new ContainerStateNormalizer();
@@ -68,7 +68,6 @@ class NormalizerFactory
         $normalizers[] = new ResourceUpdateNormalizer();
         $normalizers[] = new ContainerUpdateResultNormalizer();
         $normalizers[] = new AuthResultNormalizer();
-
         return $normalizers;
     }
 }

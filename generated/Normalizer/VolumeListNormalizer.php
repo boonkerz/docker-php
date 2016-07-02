@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class VolumeListNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class VolumeListNormalizer extends SerializerAwareNormalizer implements Denormal
         if ($type !== 'Docker\\API\\Model\\VolumeList') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\VolumeList) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -42,7 +37,7 @@ class VolumeListNormalizer extends SerializerAwareNormalizer implements Denormal
         if (property_exists($data, 'Volumes')) {
             $value = $data->{'Volumes'};
             if (is_array($data->{'Volumes'})) {
-                $values = [];
+                $values = array();
                 foreach ($data->{'Volumes'} as $value_1) {
                     $values[] = $this->serializer->deserialize($value_1, 'Docker\\API\\Model\\Volume', 'raw', $context);
                 }
@@ -53,16 +48,14 @@ class VolumeListNormalizer extends SerializerAwareNormalizer implements Denormal
             }
             $object->setVolumes($value);
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data  = new \stdClass();
+        $data = new \stdClass();
         $value = $object->getVolumes();
         if (is_array($object->getVolumes())) {
-            $values = [];
+            $values = array();
             foreach ($object->getVolumes() as $value_1) {
                 $values[] = $this->serializer->serialize($value_1, 'raw', $context);
             }
@@ -72,7 +65,6 @@ class VolumeListNormalizer extends SerializerAwareNormalizer implements Denormal
             $value = $object->getVolumes();
         }
         $data->{'Volumes'} = $value;
-
         return $data;
     }
 }

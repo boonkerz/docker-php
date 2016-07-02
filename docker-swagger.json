@@ -498,6 +498,23 @@
         },
         "HostConfig": {
           "$ref": "#/definitions/HostConfig"
+        },
+        "NetworkingSettings": {
+          "$ref": "#/definitions/NetworkingSettings"
+        }
+      }
+    },
+    "NetworkingSettings": {
+      "type": "object",
+      "properties": {
+        "EndpointsConfig": {
+          "type": ["object", "null"],
+          "additionalProperties": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/definitions/EndpointConfig"
+            }
+          }
         }
       }
     },
@@ -1400,6 +1417,12 @@
         },
         "IPv6Address": {
           "type": "string"
+        },
+        "Aliases": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

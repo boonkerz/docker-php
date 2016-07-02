@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class ProgressDetailNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
         if ($type !== 'Docker\\API\\Model\\ProgressDetail') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\ProgressDetail) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -45,11 +40,9 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
         if (property_exists($data, 'message')) {
             $object->setMessage($data->{'message'});
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getCode()) {
@@ -58,7 +51,6 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
         if (null !== $object->getMessage()) {
             $data->{'message'} = $object->getMessage();
         }
-
         return $data;
     }
 }

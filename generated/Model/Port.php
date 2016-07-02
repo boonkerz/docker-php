@@ -16,7 +16,6 @@ class Port
      * @var string
      */
     protected $type;
-
     /**
      * @return int
      */
@@ -24,7 +23,6 @@ class Port
     {
         return $this->privatePort;
     }
-
     /**
      * @param int $privatePort
      *
@@ -33,10 +31,8 @@ class Port
     public function setPrivatePort($privatePort = null)
     {
         $this->privatePort = $privatePort;
-
         return $this;
     }
-
     /**
      * @return int
      */
@@ -44,7 +40,6 @@ class Port
     {
         return $this->publicPort;
     }
-
     /**
      * @param int $publicPort
      *
@@ -53,10 +48,8 @@ class Port
     public function setPublicPort($publicPort = null)
     {
         $this->publicPort = $publicPort;
-
         return $this;
     }
-
     /**
      * @return string
      */
@@ -64,7 +57,6 @@ class Port
     {
         return $this->type;
     }
-
     /**
      * @param string $type
      *
@@ -73,7 +65,6 @@ class Port
     public function setType($type = null)
     {
         $this->type = $type;
-
         return $this;
     }
 }

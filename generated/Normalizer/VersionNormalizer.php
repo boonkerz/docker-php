@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class VersionNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class VersionNormalizer extends SerializerAwareNormalizer implements Denormalize
         if ($type !== 'Docker\\API\\Model\\Version') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\Version) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -66,11 +61,9 @@ class VersionNormalizer extends SerializerAwareNormalizer implements Denormalize
         if (property_exists($data, 'BuildTime')) {
             $object->setBuildTime($data->{'BuildTime'});
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
         $data = new \stdClass();
         if (null !== $object->getVersion()) {
@@ -100,7 +93,6 @@ class VersionNormalizer extends SerializerAwareNormalizer implements Denormalize
         if (null !== $object->getBuildTime()) {
             $data->{'BuildTime'} = $object->getBuildTime();
         }
-
         return $data;
     }
 }

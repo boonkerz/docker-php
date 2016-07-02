@@ -6,7 +6,6 @@ use Joli\Jane\Reference\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-
 class ContainerUpdateResultNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
@@ -14,20 +13,16 @@ class ContainerUpdateResultNormalizer extends SerializerAwareNormalizer implemen
         if ($type !== 'Docker\\API\\Model\\ContainerUpdateResult') {
             return false;
         }
-
         return true;
     }
-
     public function supportsNormalization($data, $format = null)
     {
         if ($data instanceof \Docker\API\Model\ContainerUpdateResult) {
             return true;
         }
-
         return false;
     }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (empty($data)) {
             return null;
@@ -42,7 +37,7 @@ class ContainerUpdateResultNormalizer extends SerializerAwareNormalizer implemen
         if (property_exists($data, 'Warnings')) {
             $value = $data->{'Warnings'};
             if (is_array($data->{'Warnings'})) {
-                $values = [];
+                $values = array();
                 foreach ($data->{'Warnings'} as $value_1) {
                     $values[] = $value_1;
                 }
@@ -53,16 +48,14 @@ class ContainerUpdateResultNormalizer extends SerializerAwareNormalizer implemen
             }
             $object->setWarnings($value);
         }
-
         return $object;
     }
-
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = array())
     {
-        $data  = new \stdClass();
+        $data = new \stdClass();
         $value = $object->getWarnings();
         if (is_array($object->getWarnings())) {
-            $values = [];
+            $values = array();
             foreach ($object->getWarnings() as $value_1) {
                 $values[] = $value_1;
             }
@@ -72,7 +65,6 @@ class ContainerUpdateResultNormalizer extends SerializerAwareNormalizer implemen
             $value = $object->getWarnings();
         }
         $data->{'Warnings'} = $value;
-
         return $data;
     }
 }
